@@ -26,7 +26,7 @@ const TableCh = () => {
         })
     }
     consultAPI();
-}, [])
+}, [setCharacters, setLoading])
 
 
   const columns = useMemo(() => {
@@ -78,7 +78,7 @@ const TableCh = () => {
                     <tr  {...headerGroup.getHeaderGroupProps()}>
                       {
                         headerGroup.headers.map( column => (
-                          <th scope='col' className="p-2 text-center"
+                          <th key={column.id} scope='col' className="p-2 text-center"
                             {...column.getHeaderProps()}>
                             {column.render('Header')}
                             <div className='mt-2 text-zinc-900 dark:text-zinc-200'>{column.canFilter ? column.render('Filter') : null}</div>
@@ -93,9 +93,9 @@ const TableCh = () => {
                 {page.map((row) => {
                     prepareRow(row)
                     return(
-                      <tr className="bg-white border-b even:bg-slate-700 odd:bg-slate-800 dark:border-gray-700" {...row.getRowProps()}>
+                      <tr key={row.id} className="bg-white border-b even:bg-slate-700 odd:bg-slate-800 dark:border-gray-700" {...row.getRowProps()}>
                         {row.cells.map((cell) => {
-                            return <td scope="col" className="p-2 text-center font-medium text-zinc-200 dark:text-white" {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                            return <td key={cell.id} scope="col" className="p-2 text-center font-medium text-zinc-200 dark:text-white" {...cell.getCellProps()}>{cell.render('Cell')}</td>
                         })}
                       </tr>
                     )

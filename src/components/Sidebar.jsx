@@ -39,7 +39,7 @@ const Sidebar = () => {
                     <SheetContent className="w-32 sm:w-36 bg-zinc-950 dark:bg-slate-800 flex flex-col justify-center items-center border-r-2 border-lime-800 gap-11" side="left">
                     
                         <Link href="/">
-                            <img className="object-scale-down h-auto w-auto" src="/img/sidebar_img.png" alt="sidebar_img"/>
+                            <Image width={50} height={50} className="object-scale-down h-auto w-auto" src="/img/sidebar_img.png" alt="sidebar_img"/>
                         </Link>
                         
                         <div className='flex flex-col justify-center items-cente'>

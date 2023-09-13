@@ -1,5 +1,5 @@
 import ColumnFilter from "./ColumnFilter"
-
+import Image from "next/image";
 export const COLUMNS = [
     {
         Header: 'Id',
@@ -14,7 +14,7 @@ export const COLUMNS = [
     {
         Header: 'Image',
         accessor: 'image',
-        Cell: ({ cell }) => <div className="flex justify-center items-center"><img className="w-20 h-20 md:w-16 md:h-16 rounded-full overflow-hidden" src={cell.value} alt="Player"/></div>,
+        Cell: ({ cell }) => <div className="flex justify-center items-center"><Image width={60} height={60} priority className="w-auto h-auto rounded-full overflow-hidden" src={cell.value} alt="Player"/></div>,
         Filter: ColumnFilter
       },
     {

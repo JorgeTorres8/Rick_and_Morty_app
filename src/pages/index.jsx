@@ -4,21 +4,34 @@ import '@/app/globals.css'
 import { Button } from '@/components/ui/button'
 import { LogIn  } from 'lucide-react';
 import { UserPlus } from 'lucide-react';
-import Footer from '@/components/Footer';
+import { Webhook } from 'lucide-react';
+import useAuth from '@/hooks/useAuth';
 import AuthLayout from './layout/AuthLayout';
 
 const Start = () => {
-    
+    const {user} = useAuth();
+
     return (
       <AuthLayout
         page="Index"
       >
         <header className=' bg-zinc-900 flex flex-col justify-center items-center gap-8 md:grid md:grid-cols-2 shadow-md shadow-cyan-700'>
           <Link href="/">
-                  <img className="object-scale-down h-auto w-80 md:ml-5 md:mb-5" src="/img/logo.png" alt="Logo"/>
+                  <Image width={130} height={130} className=" mt-5 object-scale-down h-auto w-auto md:ml-5 md:mb-5" src="/img/logo.png" alt="Logo"/>
           </Link>
 
           <nav className='container mx-auto flex justify-center md:justify-end items-center gap-5 mb-5 md:mb-0'>
+            
+            {user ? 
+            
+            <Link href='/dashboard'>
+              <Button className="bg-lime-700 hover:bg-lime-800 text-zinc-200  rounded text-1xl">
+                <Webhook className="mr-2 h-6 w-6" /> Go to Dashboard
+              </Button>
+            </Link>
+            :
+
+            <>
             <Link href='/login'>
               <Button className="bg-cyan-600 hover:bg-cyan-700 text-zinc-200  rounded text-1xl">
                 <LogIn  className="mr-2 h-6 w-6" /> LogIn
@@ -30,6 +43,7 @@ const Start = () => {
                 <UserPlus className="mr-2 h-6 w-6" /> SignUp
               </Button>
             </Link>
+            </>}
           </nav>
         </header>
 
