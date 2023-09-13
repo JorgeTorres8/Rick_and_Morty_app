@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import useApp from '@/hooks/useApp'
 import { useTable, useGlobalFilter, useFilters, usePagination } from 'react-table'
 import { COLUMNS } from './ColumnsCha'
@@ -7,7 +7,27 @@ import { ArrowLeftCircle } from 'lucide-react'
 
 const TableCh = () => {
 
-  const {characters, loading, handleChangePageCharacters} = useApp();
+  const {setCharacters, characters, setLoading, loading, handleChangePageCharacters} = useApp();
+
+  useEffect(() => {
+    const consultAPI = async () => {
+      setLoading(true);
+
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/character`)
+            .then(response => response.json())
+            .then(data => {
+            const characters = data.results;
+            const characterObjects = characters.map(character => {
+                const { id, image, name, status, species, gender, type } = character;
+                return { id, image, name, status, species, gender, type };
+            });
+            setCharacters(characterObjects);
+            setLoading(false);
+        })
+    }
+    consultAPI();
+}, [])
+
 
   const columns = useMemo(() => {
     if (!loading) {

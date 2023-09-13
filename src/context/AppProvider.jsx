@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import { useToast } from "@/components/ui/use-toast"
-import Image from "next/image";
+import useAuth from "@/hooks/useAuth";
 
 const AppContext = createContext();
 
@@ -17,6 +17,7 @@ const AppProvider = ({children}) => {
     const [totalPageEpisodes, setTotalPageEpisodes] = useState(1);*/
     const [loading, setLoading] = useState(false);
 
+    const {user} = useAuth();
     const { toast } = useToast();
     const router = useRouter()
 
@@ -37,24 +38,6 @@ const AppProvider = ({children}) => {
         } 
     };    
     
-    useEffect(() => {
-        const consultAPI = async () => {
-          setLoading(true);
-
-            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/character`)
-                .then(response => response.json())
-                .then(data => {
-                const characters = data.results;
-                const characterObjects = characters.map(character => {
-                    const { id, image, name, status, species, gender, type } = character;
-                    return { id, image, name, status, species, gender, type };
-                });
-                setCharacters(characterObjects);
-                setLoading(false);
-            })
-        }
-        consultAPI();
-    }, [])
 
     useEffect(() => {
         const consultAPI = async () => {
@@ -81,25 +64,6 @@ const AppProvider = ({children}) => {
         setPageCharacters(e);
         console.log(pageCharacters)
     }
-
-    useEffect(() => {
-    const consultEpisodesAPI = async () => {
-        setLoading(true);
-
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/episode`)
-            .then(response => response.json())
-            .then(data => {
-            const episodes = data.results;
-            const episodesObjects = episodes.map(episodeMap => {
-                const { id, name, air_date, episode} = episodeMap;
-                return { id, name, air_date, episode};
-            });
-            setEpisodes(episodesObjects);
-            setLoading(false);
-        })
-    }
-    consultEpisodesAPI();
-    }, [])
 
     useEffect(() => {
         const consultAPI = async () => {
@@ -145,7 +109,7 @@ const AppProvider = ({children}) => {
     }, [favoriteCharacter])
 
     useEffect(() => {
-        if (description.length && router.pathname === '/dashboard') {
+        if (description.length && user && router.pathname === '/dashboard') {
             toast({
                 description: description,
                 className:"border-cyan-700 bg-zinc-300 text-zinc-800 font-bold dark:bg-zinc-300 dark:text-zinc-800 rounded-xl shadow-md shadow-lime-800 text-center top:1",
@@ -160,10 +124,13 @@ const AppProvider = ({children}) => {
                 handleFavorites,
                 favoriteCharacter,
                 description,
+                setCharacters,
                 characters,
                 handleChangePageCharacters,
                 episodes,
-                handleChangePageEpisodes
+                setEpisodes,
+                handleChangePageEpisodes,
+                setLoading
             }}
         >
             {children}

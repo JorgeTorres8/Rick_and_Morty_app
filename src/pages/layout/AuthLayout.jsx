@@ -1,10 +1,11 @@
 import '@/app/globals.css'
 import React from 'react';
+import { useRouter } from 'next/router';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 
 const AuthLayout = ({children, page}) => {
-      
+      const router = useRouter()
     return (
         <>
             <Head> 
@@ -30,7 +31,9 @@ const AuthLayout = ({children, page}) => {
                 {children}
             </div>
 
-            <Footer/>
+            {router.pathname == '/' &&
+                <Footer/>
+            }
         </>
     )
 }
