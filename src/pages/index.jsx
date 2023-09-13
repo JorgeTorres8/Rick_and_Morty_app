@@ -55,6 +55,7 @@ const Start = () => {
               fit="contain"
               alt="login image 1"
               priority="true"
+              className="w-auto h-auto"
             />
           </div>
         </main>
@@ -77,6 +78,7 @@ const Start = () => {
                 fit="contain"
                 alt="login image 2"
                 priority="true"
+                className="w-auto h-auto"
               />
           </div>
         </section>
