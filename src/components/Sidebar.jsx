@@ -21,6 +21,7 @@ const Sidebar = () => {
     return (
         <>
             <aside className='bg-zinc-950 dark:bg-slate-800 p-2 flex items-center justify-center'>
+                
                 <Sheet>
                     <SheetTrigger>
                         <div className='w-auto h-auto'>
@@ -30,11 +31,17 @@ const Sidebar = () => {
                                 height={40}
                                 fit="contain"
                                 alt="Portal Image"
+                                className='w-auto h-auto'
                             />
                         </div>
                     </SheetTrigger>
                     
                     <SheetContent className="w-32 sm:w-36 bg-zinc-950 dark:bg-slate-800 flex flex-col justify-center items-center border-r-2 border-lime-800 gap-11" side="left">
+                    
+                        <Link href="/">
+                            <img className="object-scale-down h-auto w-auto" src="/img/sidebar_img.png" alt="sidebar_img"/>
+                        </Link>
+                        
                         <div className='flex flex-col justify-center items-cente'>
                             <div className="w-auto h-auto rounded-full overflow-hidden">
                                 <Image  
