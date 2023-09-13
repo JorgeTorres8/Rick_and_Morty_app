@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import useApp from '@/hooks/useApp'
 import { useTable, useGlobalFilter, useFilters, usePagination } from 'react-table'
 import { COLUMNS } from './ColumnsEpi'
@@ -7,7 +7,26 @@ import { ArrowLeftCircle } from 'lucide-react'
 
 const TableEpi = () => {
 
-  const {episodes, loading, handleChangePageEpisodes} = useApp();
+  const {episodes,setEpisodes, setLoading, loading, handleChangePageEpisodes} = useApp();
+
+  useEffect(() => {
+    const consultEpisodesAPI = async () => {
+        setLoading(true);
+
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/episode`)
+            .then(response => response.json())
+            .then(data => {
+            const episodes = data.results;
+            const episodesObjects = episodes.map(episodeMap => {
+                const { id, name, air_date, episode} = episodeMap;
+                return { id, name, air_date, episode};
+            });
+            setEpisodes(episodesObjects);
+            setLoading(false);
+        })
+    }
+    consultEpisodesAPI();
+    }, [])
 
   const columns = useMemo(() => {
     if (!loading) {
