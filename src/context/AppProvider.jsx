@@ -62,7 +62,6 @@ const AppProvider = ({children}) => {
     
     const handleChangePageCharacters = (e, value) => {
         setPageCharacters(e);
-        console.log(pageCharacters)
     }
 
     useEffect(() => {
@@ -87,7 +86,6 @@ const AppProvider = ({children}) => {
 
     const handleChangePageEpisodes = (e, value) => {
         setPageEpisodes(e);
-        console.log(pageCharacters)
     }
    
     useEffect(() => {
@@ -106,7 +104,7 @@ const AppProvider = ({children}) => {
                 setDescription("I am the princess of the Abandango Cluster!");
             }
         }
-    }, [favoriteCharacter])
+    }, [favoriteCharacter, description, user, router.pathname, toast])
 
     useEffect(() => {
         if (description.length && user && router.pathname === '/dashboard') {

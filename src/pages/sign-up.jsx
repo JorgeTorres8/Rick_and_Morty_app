@@ -14,8 +14,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button";
 import '@/app/globals.css'
 import Link from "next/link";
-import axios from "axios";
 import AuthLayout from './layout/AuthLayout';
+import Image from "next/image";
 
 const FormSchema = z
     .object({
@@ -56,7 +56,7 @@ const SignUp = () => {
             <div className="h-screen flex items-center justify-center flex-col">
             
                 <Link href="/">
-                    <img className="object-scale-down h-45 w-96" src="/img/logo.png" alt="Logo"/>
+                    <Image width={130} height={130} priority className="object-scale-down h-45 w-96" src="/img/logo.png" alt="Logo"/>
                 </Link>
 
                 <h1 className="text-4xl font-bold lg:text-5xl mt-10 capitalize">Get ready for adventure</h1>

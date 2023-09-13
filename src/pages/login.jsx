@@ -1,5 +1,4 @@
 'use client';
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import {useForm} from "react-hook-form";
 import * as z from "zod"
@@ -20,6 +19,7 @@ import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
 import { useToast } from "@/components/ui/use-toast"
 import AuthLayout from './layout/AuthLayout';
+import Image from "next/image";
 
 const FormSchema = z.object({
     email: z.string().min(1, 'Email is Required').email('Invalid Email'),
@@ -31,15 +31,10 @@ const FormSchema = z.object({
 
 const SignIn = () => {
 
-    const { alert, user, setUser,isAuth, setIsAuth, setAlert } = useAuth();
     const router = useRouter(); 
     const { toast } = useToast()
+    const { setIsAuth, setAlert } = useAuth();
 
-    useEffect(() => {
-      if(user) {
-        router.push('/dashboard');
-      }
-    }, [])
     
     const form = useForm({
         resolver: zodResolver(FormSchema),
@@ -88,7 +83,7 @@ const SignIn = () => {
             <div className="container h-screen flex items-center justify-center flex-col ">
 
                 <Link href="/">
-                    <img className="object-scale-down h-auto w-96" src="/img/logo.png" alt="Logo"/>
+                    <Image width={150} height={150} priority className="object-scale-down h-auto w-auto" src="/img/logo.png" alt="Logo"/>
                 </Link>
 
                 <h1 className="text-4xl font-bold lg:text-5xl mt-10 capitalize text-center">The universe awaits you</h1>
