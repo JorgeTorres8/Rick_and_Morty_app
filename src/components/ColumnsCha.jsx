@@ -14,7 +14,7 @@ export const COLUMNS = [
     {
         Header: 'Image',
         accessor: 'image',
-        Cell: ({ cell }) => <div className="flex justify-center items-center"><Image width={60} height={60} priority className="w-auto h-auto rounded-full overflow-hidden" src={cell.value} alt="Player"/></div>,
+        Cell: ({ cell }) => <div className="flex justify-center items-center"><Image width={60} height={60} priority className="w-auto h-auto rounded-full overflow-hidden" src={cell.value} alt="Player" as="image"/></div>,
         Filter: ColumnFilter
       },
     {

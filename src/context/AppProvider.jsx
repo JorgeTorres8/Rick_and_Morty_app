@@ -114,7 +114,7 @@ const AppProvider = ({children}) => {
                 duration: 2200
             });
         }
-    }, [description])
+    }, [description, router.pathname, toast, user])
     
     return(    
         <AppContext.Provider

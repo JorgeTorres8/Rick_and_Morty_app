@@ -75,7 +75,7 @@ const TableCh = () => {
             <thead className="text-xs text-center text-gray-200 uppercase bg-zinc-700 dark:bg-cyan-900 dark:text-zinc-200">
                 {
                   headerGroups.map(headerGroup => (
-                    <tr  {...headerGroup.getHeaderGroupProps()}>
+                    <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
                       {
                         headerGroup.headers.map( column => (
                           <th key={column.id} scope='col' className="p-2 text-center"
